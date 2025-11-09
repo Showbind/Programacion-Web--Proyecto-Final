@@ -1,0 +1,34 @@
+.navbar-light {
+  background-color: #1a2625e7 !important;
+}
+
+/* BOTON MENU DESPLEGABLE */
+.navbar-toggler {
+  border: none;
+  box-shadow: none;
+  outline: none !important;
+}
+
+.navbar-toggler:focus {
+  border: none;
+  box-shadow: none;
+  outline: none !important;
+}
+
+.nav-link {
+  /* Items menu desplegable */
+  font-family: "Noto Sans Newa", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  color: #e39f4c;
+}
+
+.nav-link:hover {
+  color: #f27b13;
+  text-decoration: underline;
+}
+
+.navbar-light .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
