@@ -44,6 +44,15 @@
                     <h1 class="form_header">Crear Cuenta</h1>
                     <hr>
 
+                   <!-- Input Username -->
+                    <div class="form-group">
+                        <label for="username">Nombre de Usuario</label>
+                        <input id="username_create" type="text" name="username" class="form-control bg-transparent" required >
+                        <div class="invalid-feedback">
+                            - Mínimo 4 carácteres
+                        </div>
+                    </div>
+
                     <!-- Input Email -->
                     <div class="form-group">
                         <label for="email">Correo Electrónico</label>
@@ -52,7 +61,7 @@
                             Introduce un correo electrónico válido.
                         </div>
                     </div>
-
+                    <hr>
                     <!-- Input Contraseña -->
                     <div class="form-group">
                         <label for="password_create">Contraseña</label><br>
@@ -60,6 +69,16 @@
                             required>
                         <div class="invalid-feedback">
                             - Mínimo 8 carácteres <br> - Req. un número, letra y carácter especial (#?!@$%^&*-)
+                        </div>
+                    </div>
+
+                    <!-- Input Repetir Contraseña -->
+                    <div class="form-group">
+                        <label for="password_repeat">Repetir Contraseña</label><br>
+                        <input type="password" name="password_repeat" id="password_repeat" class="form-control bg-transparent"
+                            required>
+                        <div class="invalid-feedback">
+                            - Las contraseñas no coinciden.
                         </div>
                     </div>
 
