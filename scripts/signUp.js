@@ -4,33 +4,32 @@ function signInFormValidation() {
     const passwordInput = document.getElementById('password_create')
     const repeatPasswordInput = document.getElementById('password_repeat')
     const userNameInput = document.getElementById('username_create')
+    const coordinatesInput = document.getElementById('coordinates')
 
-    const userNameRegex = /^.{4,}$/ // Mínimo 4 caracteres
+    // Regex nombre de usuario: mínimo 4 caracteres
+    const userNameRegex = /^.{4,}$/
 
     // Regex contraseña: mínimo 8 caracteres, una letra, un número y un carácter especial (#?!@$%^&*-)
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[#?!@$%^&*-]).{8,}$/ // Copy-Paste de una pagina web
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[#?!@$%^&*-]).{8,}$/
+
+    // Regex coordenadas: formato decimal "latitud, longitud" (e.g: "40.4168, -3.7038")
+    const coordinatesRegex = /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/
 
     // Al hacer "submit" en el form
     form.addEventListener('submit', event => {
-        let isPasswordValid = true;
-        let isRepeatPasswordValid = true;
 
-        // Validar la contraseña
-        if (!passwordRegex.test(passwordInput.value)) {
-            passwordInput.setCustomValidity('La contraseña no cumple los requisitos.'); // String con texto = Error (contraseña inválida) 
-            isPasswordValid = false;
-        } else {
-            passwordInput.setCustomValidity(''); // String vacío = No hay Error (Contraseña correcta); NO CAMBIAR el str
-        }
+        // Validar contraseña, nombre de usuario y coordenadas
+        validateInputValue(passwordInput, passwordRegex, 'La contraseña no cumple los requisitos.');
+        validateInputValue(userNameInput, userNameRegex, 'El nombre del usuario no cumple los requisitos.');
+        validateInputValue(coordinatesInput, coordinatesRegex, 'Coordenadas no válidas. Formato: "latitud, longitud" (e.g: "40.4168, -3.7038")');
 
         // Validar que las contraseñas coincidan
         if (passwordInput.value !== repeatPasswordInput.value) {
-            isRepeatPasswordValid = false;
             repeatPasswordInput.setCustomValidity('Las contraseñas no coinciden.');
         }
 
         // Validar formulario
-        if (!form.checkValidity() || !isPasswordValid || !isRepeatPasswordValid) {
+        if (!form.checkValidity()) {
             event.preventDefault();
             event.stopPropagation();
         }
@@ -42,61 +41,64 @@ function signInFormValidation() {
     // Validar contraseña mientras el usuario escribe
     passwordInput.addEventListener('input', () => {
 
-        // Eliminar espacios
-        let passwordSpacesRemoved = passwordInput.value.replace(/\s/g, '');
+        removeInputSpaces(passwordInput);
 
-        //Bloquear espacios
-        if (passwordSpacesRemoved != passwordInput.value) {
-            passwordInput.value = passwordSpacesRemoved
-        }
-
-        // Comparar contraseña con el Regex
-        if (passwordRegex.test(passwordInput.value)) {
-            passwordInput.setCustomValidity('');
-        }
-        else {
-            passwordInput.setCustomValidity('La contraseña no cumple los requisitos.');
-        }
+        let errorMsg = 'La contraseña no cumple los requisitos.';
+        validateInputValue(passwordInput, passwordRegex, errorMsg);
     });
 
     // Validar repetir contraseña mientras el usuario escribe
     repeatPasswordInput.addEventListener('input', () => {
-        // Eliminar espacios
-        let repeatPasswordSpacesRemoved = repeatPasswordInput.value.replace(/\s/g, '');
 
-        //Bloquear espacios
-        if (repeatPasswordSpacesRemoved != repeatPasswordInput.value) {
-            repeatPasswordInput.value = repeatPasswordSpacesRemoved
-        }
+        removeInputSpaces(repeatPasswordInput)
 
         // Comparar las contraseñas
         if (passwordInput.value === repeatPasswordInput.value) {
             repeatPasswordInput.setCustomValidity('');
         }
-        else{
+        else {
             repeatPasswordInput.setCustomValidity('Las contraseñas no coinciden.');
         }
     });
 
     // Validar nombre del usuario mientras el usuario escribe
     userNameInput.addEventListener('input', () => {
-        // Eliminar espacios
-        let userNameSpacesRemoved = userNameInput.value.replace(/\s/g, '');
 
-        //Bloquear espacios
-        if (userNameSpacesRemoved != userNameInput.value) {
-            userNameInput.value = userNameSpacesRemoved
-        }
+        removeInputSpaces(userNameInput);
 
-        // Comparar nombre del usuario con el Regex
-        if (userNameRegex.test(userNameInput.value)) {
-            userNameInput.setCustomValidity('');
-        }
-        else {
-            userNameInput.setCustomValidity('El nombre de usuario no cumple los requisitos.');
-        }
+        let errorMsg = 'El nombre del usuario no cumple los requisitos.';
+        validateInputValue(userNameInput, userNameRegex, errorMsg);
+    });
+
+    // Validar coordenadas mientras el usuario escribe
+    coordinatesInput.addEventListener('input', () => {
+
+        let errorMsg = 'Coordenadas no válidas. Formato: "latitud, longitud" (e.g: "40.4168, -3.7038")';
+        validateInputValue(coordinatesInput, coordinatesRegex, errorMsg);
     });
 }
+
+// ----------------------------------------------------------
+
+//                  FUNCIONES AUXILIARES
+
+// ----------------------------------------------------------
+
+// Elimina y bloquea los espacios dentro del input
+function removeInputSpaces(inputElement) {
+    inputElement.value = inputElement.value.replace(/\s/g, '');
+}
+
+// Valida un input y muestra un error en el formulario si no es válido 
+function validateInputValue(inputElement, regex, errorMsg) {
+    if (regex.test(inputElement.value)) {
+        inputElement.setCustomValidity('');
+    }
+    else {
+        inputElement.setCustomValidity(errorMsg);
+    }
+}
+
 
 // EJECUCIÓN
 signInFormValidation();
