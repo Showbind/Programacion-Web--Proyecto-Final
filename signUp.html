@@ -16,14 +16,14 @@
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
-    </script>
+        </script>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-    rel="stylesheet">
+        rel="stylesheet">
 
     <!-- Fontawesome -->
     <script src="https://kit.fontawesome.com/8d1c49f937.js" crossorigin="anonymous"></script>
@@ -37,17 +37,18 @@
     <div class="container-fluid">
         <div class="row" style="height: 100vh;">
             <div class="col-12 col-lg-12" id="row_1">
-                <form class="signForm col-12 col-md-7 col-lg-6 col-xl-4 col-xxl-3 needs-validation" method="post"
+                <form class="signForm col-12 col-md-7 col-lg-6 col-xl-4 col-xxl-4 needs-validation" method="post"
                     novalidate>
 
                     <!-- Titulo Formulario -->
                     <h1 class="form_header">Crear Cuenta</h1>
                     <hr>
 
-                   <!-- Input Username -->
+                    <!-- Input Username -->
                     <div class="form-group">
                         <label for="username">Nombre de Usuario</label>
-                        <input id="username_create" type="text" name="username" class="form-control bg-transparent" required >
+                        <input id="username_create" type="text" name="username" class="form-control bg-transparent"
+                            required>
                         <div class="invalid-feedback">
                             - Mínimo 4 carácteres
                         </div>
@@ -61,7 +62,20 @@
                             Introduce un correo electrónico válido.
                         </div>
                     </div>
+
+                    <!-- Coordenadas -->
+                    <div class="form-group">
+                        <label for="coordinates">Coordenadas</label><br>
+                        <input type="text" name="coordinates" id="coordinates" class="form-control bg-transparent"
+                            required>
+                        
+                        <div class="invalid-feedback">
+                            - Coordenadas no válidas. Formato: "latitud, longitud" (e.g: "40.4168, -3.7038")
+                        </div>
+                    </div>
+
                     <hr>
+
                     <!-- Input Contraseña -->
                     <div class="form-group">
                         <label for="password_create">Contraseña</label><br>
@@ -75,8 +89,8 @@
                     <!-- Input Repetir Contraseña -->
                     <div class="form-group">
                         <label for="password_repeat">Repetir Contraseña</label><br>
-                        <input type="password" name="password_repeat" id="password_repeat" class="form-control bg-transparent"
-                            required>
+                        <input type="password" name="password_repeat" id="password_repeat"
+                            class="form-control bg-transparent" required>
                         <div class="invalid-feedback">
                             - Las contraseñas no coinciden.
                         </div>
@@ -86,7 +100,7 @@
                     <label for="terminos_checkbox" class="form-check-label">
                         <p><a href="login.html">Iniciar Sesión</a></p>
                     </label>
-                    
+
                     <!-- Botón Submit -->
                     <div style="display: flex;">
                         <button class="btn btn-outline-info" id="bt_submit" type="submit">Registrarse</button>
@@ -112,7 +126,8 @@
         align-content: center;
         background-image: url(https://images.unsplash.com/photo-1581252584837-95f73fd23574?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hvbmdxaW5nfGVufDB8fDB8fHww&fm=jpg&q=60&w=3000);
         background-repeat: no-repeat;
-        background-position: right;  /* Posición del fondo en movil  */
+        background-position: right;
+        /* Posición del fondo en movil  */
         background-size: cover;
     }
 </style>
