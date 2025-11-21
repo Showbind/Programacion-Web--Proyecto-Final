@@ -1,50 +1,66 @@
 
-// ----------------------------------------------------------
 
-//                  INICIAR SESIÓN
-
-// ----------------------------------------------------------
+//-------------------------- INICIAR SESIÓN ----------------------------
 
 function loginFormValidation() {
-    const form = document.querySelector('.signForm')
-    const passwordInput = document.getElementById('password_create')
+    const form = document.querySelector('.signForm');
+    const passwordInput = document.getElementById('password_create');
+    const emailInput = document.getElementById('email');
+    const formStatusMsg = document.getElementById("form_status_message");
 
+    // Regex validación
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
     // Al hacer "submit" en el form
     form.addEventListener('submit', event => {
+
+        // Resetear mensaje de error servidor
+        formStatusMsg.innerText = "";
+
+        // Cancelar la recarga de pagina para manejar el "SUBMIT" 
         event.preventDefault();
         event.stopPropagation();
 
         // Validar formulario
         if (form.checkValidity()) {
+
+            // CURL Body
+            const userData = {
+                email: emailInput.value.trim(),
+                password: passwordInput.value.trim(),
+            };
+
             // Enviar datos al servidor
-                // Si datos usuario OK -> redirigir a la pagina principal 
-                // Si datos usuario INCORRECTOS -> Mostrar error en el form
+            fetchLogInUser(userData, formStatusMsg)
+                .then(isUserLoged => {
+                    if (isUserLoged) {
+                        // Redirigir a la página principal tras 2 segundos
+                        setTimeout(() => {
+                            window.location.href = "productos.html";
+                        }, 2000);
+                    }
+                });
         }
+        else { // DATOS NO VÁLIDOS
 
-        // Clase validación datos Bootstrap
-        form.classList.add('was-validated');
-    }, false)
-
-    // Bloquear el uso de espacios en la contraseña
-    passwordInput.addEventListener('input', () => {
-        let passwordRemoveSpaces = passwordInput.value.replace(/\s/g, '');
-        passwordInput.classList.remove('is-valid')
-
-        if (passwordRemoveSpaces != passwordInput.value) {
-            passwordInput.value = passwordRemoveSpaces
+            // Clase validación datos Bootstrap
+            form.classList.add('was-validated');
         }
+    }, false);
+
+    emailInput.addEventListener('input', () => {
+
+        let errorMsg = 'Correo electrónico no válido.';
+        validateInputValue(emailInput, emailRegex, errorMsg);
     });
-}
+};
 
-// ----------------------------------------------------------
-
-//                  CREAR CUENTA
-
-// ----------------------------------------------------------
+//-------------------------- CREAR CUENTA ----------------------------
 
 function signInFormValidation() {
 
     const form = document.querySelector('.signForm');
+    const formStatusMsg = document.getElementById("form_status_message");
 
     // Datos usuario del formulario
     const userNameInput = document.getElementById('username');
@@ -53,40 +69,49 @@ function signInFormValidation() {
     const repeatPasswordInput = document.getElementById('password_repeat');
     const coordinatesInput = document.getElementById('coordinates');
 
-    // Regex nombre de usuario: mínimo 4 caracteres
-    const userNameRegex = /^.{4,}$/;
 
-    // Regex contraseña: mínimo 8 caracteres, una letra, un número y un carácter especial (#?!@$%^&*-)
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[#?!@$%^&*-]).{8,}$/;
+    // Regex validación
+    const userNameRegex = /^.{4,}$/; // Regex nombre de usuario: mínimo 4 caracteres
+    const passwordRegex = /^.{6,}$/; // Regex contraseña: mínimo 6 carácteres
+    const coordinatesRegex = /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/; // Regex coordenadas: formato decimal "latitud, longitud" (e.g: "40.4168, -3.7038")
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    // Regex coordenadas: formato decimal "latitud, longitud" (e.g: "40.4168, -3.7038")
-    const coordinatesRegex = /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/;
-
-
-    // Al hacer "SUBMIT" en el form
+    // Al enviar el formulario
     form.addEventListener('submit', event => {
-        
+
+        // Resetear mensaje de error servidor
+        formStatusMsg.innerText = "";
+
         // Cancelar la recarga de pagina para manejar el "SUBMIT" 
         event.preventDefault();
         event.stopPropagation();
 
         // Validar formulario
-        if (form.checkValidity()) { // EXITO
-            
-            // JSON a enviar en el POST
+        if (form.checkValidity()) {
+
+            // Extraer latitud y longitud
+            const latitude = coordinatesInput.value.split(",")[0].trim();
+            const longitude = coordinatesInput.value.split(",")[1].trim();
+
+            // CURL Body
             const userData = {
-                username: userNameInput.value,
+                username: userNameInput.value.trim(),
                 email: emailInput.value,
                 password: passwordInput.value,
-                coordinates: coordinatesInput.value
+                latitude: parseFloat(latitude),
+                longitude: parseFloat(longitude)
             };
-            
-            // hacer un fetch
-            // SI HTTP 200 (OK)   -> usuario creado con exito -> redirigir a la pagina de productos 
-            // SI usuario existe -> mostrar en el form
 
-            // Redirigir a la pagina principal
-            window.location.replace("/");
+            // Enviar datos al servidor
+            fetchCreateUser(userData, formStatusMsg)
+                .then(isUserCreated => {
+                    if (isUserCreated) {
+                        // Redirigir a la página principal tras 2 segundos
+                        setTimeout(() => {
+                            window.location.href = "productos.html";
+                        }, 2000);
+                    }
+                });
         }
         else { // DATOS NO VÁLIDOS
 
@@ -94,9 +119,30 @@ function signInFormValidation() {
             form.classList.add('was-validated');
         }
 
-    }, false)
+    }, false);
 
-    // Validar contraseña 
+    // VALIDAR INPUTS 
+
+    userNameInput.addEventListener('input', () => {
+
+        let errorMsg = 'El nombre del usuario no cumple los requisitos.';
+        validateInputValue(userNameInput, userNameRegex, errorMsg);
+    });
+
+    emailInput.addEventListener('input', () => {
+
+        removeInputSpaces(emailInput);
+
+        let errorMsg = 'Correo electrónico no válido.';
+        validateInputValue(emailInput, emailRegex, errorMsg);
+    });
+
+    coordinatesInput.addEventListener('input', () => {
+
+        let errorMsg = 'Coordenadas no válidas. Formato: "latitud, longitud" (e.g: "40.4168, -3.7038")';
+        validateInputValue(coordinatesInput, coordinatesRegex, errorMsg);
+    });
+
     passwordInput.addEventListener('input', () => {
 
         removeInputSpaces(passwordInput);
@@ -117,23 +163,7 @@ function signInFormValidation() {
             repeatPasswordInput.setCustomValidity('Las contraseñas no coinciden.');
         }
     });
-
-    // Validar nombre del usuario 
-    userNameInput.addEventListener('input', () => {
-
-        removeInputSpaces(userNameInput);
-
-        let errorMsg = 'El nombre del usuario no cumple los requisitos.';
-        validateInputValue(userNameInput, userNameRegex, errorMsg);
-    });
-
-    // Validar coordenadas 
-    coordinatesInput.addEventListener('input', () => {
-
-        let errorMsg = 'Coordenadas no válidas. Formato: "latitud, longitud" (e.g: "40.4168, -3.7038")';
-        validateInputValue(coordinatesInput, coordinatesRegex, errorMsg);
-    });
-}
+};
 
 // ----------------------------------------------------------
 
@@ -155,3 +185,74 @@ function validateInputValue(inputElement, regex, errorMsg = "Datos no válidos."
         inputElement.setCustomValidity(errorMsg);
     }
 }
+
+// Devuelve "true" si el usuario se ha creado con éxito
+async function fetchCreateUser(curlBody, formStatusMsg) {
+    try {
+        const response = await fetch('https://practicaprogramacionweb.duckdns.org/users/register', {
+            method: 'POST',
+            headers: {
+                "accept": "*/*",
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(curlBody)
+        });
+
+        if (!response.ok) {
+            if (response.status == 409) {
+
+                formStatusMsg.innerText = "El nombre de usuario o correo electrónico ya existen.";
+                formStatusMsg.classList.add("error_msg");
+            };
+
+            return false;
+        };
+
+        // HTTP OK
+        formStatusMsg.innerText = "Usuario creado con éxito.";
+        formStatusMsg.classList.add("success_msg");
+
+        return true;
+    }
+    catch (error) {
+        console.error("Error: ", error);
+        return false;
+    };
+};
+
+async function fetchLogInUser(curlBody, formStatusMsg) {
+    try {
+        const response = await fetch('https://practicaprogramacionweb.duckdns.org/auth/login', {
+            method: 'POST',
+            headers: {
+                "accept": "*/*",
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(curlBody)
+        });
+
+        if (!response.ok) {
+            if (response.status == 401) { // Datos de usuario incorrectos
+
+                formStatusMsg.innerText = "El correo electrónico o contraseña son incorrectos.";
+                formStatusMsg.classList.add("error_msg");
+            };
+
+            return false;
+        };
+
+        // HTTP OK
+        formStatusMsg.innerText = "Sesión Iniciada";
+        formStatusMsg.classList.add("success_msg");
+
+        // Guardar token en LocalStorage
+        const data = await response.json();
+        localStorage.setItem("userData", JSON.stringify(data));
+
+        return true;
+    }
+    catch (error) {
+        console.error("Error: ", error);
+        return false;
+    };
+};
