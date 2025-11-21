@@ -1,0 +1,11 @@
+.error_msg{
+    font-size: .875em;
+    color: #dc3545;
+    margin-top: .25rem;
+}
+
+.success_msg{
+    font-size: .875em;
+    color: #07c23fff;
+    margin-top: .25rem;
+}
