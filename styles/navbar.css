@@ -1,6 +1,6 @@
 
 .navbar{
-    background-color: #1a2625e7 !important;
+    background-color: #1a2625 !important;
     position: sticky;
     flex-shrink: 0; 
 }
@@ -29,6 +29,11 @@
 }
 
 .nav-link:hover {
+    color: #f27b13;
+    text-decoration: underline;
+}
+
+.nav-link:active {
     color: #f27b13;
     text-decoration: underline;
 }
