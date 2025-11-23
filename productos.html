@@ -17,8 +17,8 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="styles/navbar.css">
-    <link rel="stylesheet" href="styles/card.css">
     <link rel="stylesheet" href="styles/product_card.css">
+    <link rel="stylesheet" href="styles/styles.css">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,6 +27,8 @@
     <!-- Fontawesome -->
     <script src="https://kit.fontawesome.com/8d1c49f937.js" crossorigin="anonymous"></script>
 
+    <!-- Scripts -->
+    <script src="scripts/productos.js" defer></script>
 
 </head>
 
@@ -49,7 +51,7 @@
 
                 <!-- ELEMENTOS LADO IZQUIERDO NAVBAR -->
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link" aria-current="page" href="#">Productos</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="productos.html">Productos</a></li>
                     <li class="nav-item"><a class="nav-link " aria-current="page" href="#">Mis Productos</a></li>
                     <li class="nav-item"><a class="nav-link " aria-current="page" href="#">Estadísticas</a></li>
                 </ul>
@@ -61,7 +63,11 @@
 
                 <!-- ELEMENTOS LADO DERECHO NAVBAR -->
                 <ul class=" navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link " aria-current="page" href="login.html">Iniciar Sesión</a>
+                    <li class="nav-item"><a class="nav-link" id="username_tag">Username</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="">Icono carrito</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" id="log_out" aria-current="page" href="">Cerrar Sesión</a>
                     </li>
                 </ul>
             </div>
@@ -77,11 +83,13 @@
             <div>
                 <label for="">Filtrar por Categoría</label>
 
-                <select class="form-select" aria-label="filter_by_value">
-                    <option selected>Todas las Categorías</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                <select class="form-select" id="filter_by_category" aria-label="filter_by_value">
+                    <option value="none" selected>Todas las Categorías</option>
+                    <option value="sin estrenar">Sin Estrenar</option>
+                    <option value="como nuevo">Como Nuevo</option>
+                    <option value="en buen estado">En Buen Estado</option>
+                    <option value="aceptable">Aceptable</option>
+                    <option value="averiado">Averiado</option>
                 </select>
             </div>
 
@@ -89,17 +97,20 @@
             <div>
                 <label for="">Ordenar por Precio</label>
 
-                <select class="form-select" aria-label="sort_by_price">
-                    <option selected>Por Defecto</option>
-                    <option value="1">De menor a mayor</option>
-                    <option value="2">De mayor a menor</option>
+                <select class="form-select" id="sort_by_price" aria-label="sort_by_price">
+                    <option value="none" selected>Por Defecto</option>
+                    <option value="asc">De menor a mayor</option>
+                    <option value="desc">De mayor a menor</option>
                 </select>
             </div>
 
             <!-- Barra de Búsqueda -->
             <div>
                 <label for="">Buscar</label>
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <form>
+                    <input class="form-control mr-sm-2" id="search_input" type="search" placeholder="Search" aria-label="Search">
+                    <button class="search_button">Buscar</button>
+                </form>
             </div>
         </div>
 
@@ -108,417 +119,7 @@
             <div class="scrollabe_products"
                 style="display: flex; justify-content: space-evenly; flex-wrap: wrap; gap: 30px;">
                 <!-- Aquí van las tarjetas de productos -->
-                <div class="product_card">
-
-                    <img class="product_image"
-                        src="https://images.unsplash.com/photo-1581252584837-95f73fd23574?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hvbmdxaW5nfGVufDB8fDB8fHww&fm=jpg&q=60&w=3000"
-                        alt="">
-
-                    <div class="product_info">
-                        <div style="display: flex; justify-content: space-between;">
-
-                            <h2 class="product_title">Chongqing asdasddad</h2>
-
-                            <button class="add_to_cart_btn">Añadir a la cesta</button>
-                        </div>
-
-                        <p class="product_category">Ciudad</p>
-                        <p class="product_status"> Como nuevo</p>
-                        <p class="overflow-auto product_description">
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation
-                            ullamco tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mi </p>
-                        <p class="product_price">12550 $</p>
-                    </div>
-                </div>
-                <div class="product_card">
-
-                    <img class="product_image"
-                        src="https://images.unsplash.com/photo-1581252584837-95f73fd23574?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hvbmdxaW5nfGVufDB8fDB8fHww&fm=jpg&q=60&w=3000"
-                        alt="">
-
-                    <div class="product_info">
-                        <div style="display: flex; justify-content: space-between;">
-
-                            <h2 class="product_title">Chongqing asdasddad</h2>
-
-                            <button class="add_to_cart_btn">Añadir a la cesta</button>
-                        </div>
-
-                        <p class="product_category">Ciudad</p>
-                        <p class="product_status"> Como nuevo</p>
-                        <p class="overflow-auto product_description">
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation
-                            ullamco tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mi </p>
-                        <p class="product_price">12550 $</p>
-                    </div>
-                </div>
-                <div class="product_card">
-
-                    <img class="product_image"
-                        src="https://images.unsplash.com/photo-1581252584837-95f73fd23574?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hvbmdxaW5nfGVufDB8fDB8fHww&fm=jpg&q=60&w=3000"
-                        alt="">
-
-                    <div class="product_info">
-                        <div style="display: flex; justify-content: space-between;">
-
-                            <h2 class="product_title">Chongqing asdasddad</h2>
-
-                            <button class="add_to_cart_btn">Añadir a la cesta</button>
-                        </div>
-
-                        <p class="product_category">Ciudad</p>
-                        <p class="product_status"> Como nuevo</p>
-                        <p class="overflow-auto product_description">
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation
-                            ullamco tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mi </p>
-                        <p class="product_price">12550 $</p>
-                    </div>
-                </div>
-                <div class="product_card">
-
-                    <img class="product_image"
-                        src="https://images.unsplash.com/photo-1581252584837-95f73fd23574?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hvbmdxaW5nfGVufDB8fDB8fHww&fm=jpg&q=60&w=3000"
-                        alt="">
-
-                    <div class="product_info">
-                        <div style="display: flex; justify-content: space-between;">
-
-                            <h2 class="product_title">Chongqing asdasddad</h2>
-
-                            <button class="add_to_cart_btn">Añadir a la cesta</button>
-                        </div>
-
-                        <p class="product_category">Ciudad</p>
-                        <p class="product_status"> Como nuevo</p>
-                        <p class="overflow-auto product_description">
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation
-                            ullamco tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mi </p>
-                        <p class="product_price">12550 $</p>
-                    </div>
-                </div>
-                <div class="product_card">
-
-                    <img class="product_image"
-                        src="https://images.unsplash.com/photo-1581252584837-95f73fd23574?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hvbmdxaW5nfGVufDB8fDB8fHww&fm=jpg&q=60&w=3000"
-                        alt="">
-
-                    <div class="product_info">
-                        <div style="display: flex; justify-content: space-between;">
-
-                            <h2 class="product_title">Chongqing asdasddad</h2>
-
-                            <button class="add_to_cart_btn">Añadir a la cesta</button>
-                        </div>
-
-                        <p class="product_category">Ciudad</p>
-                        <p class="product_status"> Como nuevo</p>
-                        <p class="overflow-auto product_description">
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation
-                            ullamco tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mi </p>
-                        <p class="product_price">12550 $</p>
-                    </div>
-                </div>
-                <div class="product_card">
-
-                    <img class="product_image"
-                        src="https://images.unsplash.com/photo-1581252584837-95f73fd23574?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hvbmdxaW5nfGVufDB8fDB8fHww&fm=jpg&q=60&w=3000"
-                        alt="">
-
-                    <div class="product_info">
-                        <div style="display: flex; justify-content: space-between;">
-
-                            <h2 class="product_title">Chongqing asdasddad</h2>
-
-                            <button class="add_to_cart_btn">Añadir a la cesta</button>
-                        </div>
-
-                        <p class="product_category">Ciudad</p>
-                        <p class="product_status"> Como nuevo</p>
-                        <p class="overflow-auto product_description">
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation
-                            ullamco tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mi </p>
-                        <p class="product_price">12550 $</p>
-                    </div>
-                </div>
-                <div class="product_card">
-
-                    <img class="product_image"
-                        src="https://images.unsplash.com/photo-1581252584837-95f73fd23574?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hvbmdxaW5nfGVufDB8fDB8fHww&fm=jpg&q=60&w=3000"
-                        alt="">
-
-                    <div class="product_info">
-                        <div style="display: flex; justify-content: space-between;">
-
-                            <h2 class="product_title">Chongqing asdasddad</h2>
-
-                            <button class="add_to_cart_btn">Añadir a la cesta</button>
-                        </div>
-
-                        <p class="product_category">Ciudad</p>
-                        <p class="product_status"> Como nuevo</p>
-                        <p class="overflow-auto product_description">
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation
-                            ullamco tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mi </p>
-                        <p class="product_price">12550 $</p>
-                    </div>
-                </div>
-                <div class="product_card">
-
-                    <img class="product_image"
-                        src="https://images.unsplash.com/photo-1581252584837-95f73fd23574?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hvbmdxaW5nfGVufDB8fDB8fHww&fm=jpg&q=60&w=3000"
-                        alt="">
-
-                    <div class="product_info">
-                        <div style="display: flex; justify-content: space-between;">
-
-                            <h2 class="product_title">Chongqing asdasddad</h2>
-
-                            <button class="add_to_cart_btn">Añadir a la cesta</button>
-                        </div>
-
-                        <p class="product_category">Ciudad</p>
-                        <p class="product_status"> Como nuevo</p>
-                        <p class="overflow-auto product_description">
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation
-                            ullamco tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mi </p>
-                        <p class="product_price">12550 $</p>
-                    </div>
-                </div>
-                <div class="product_card">
-
-                    <img class="product_image"
-                        src="https://images.unsplash.com/photo-1581252584837-95f73fd23574?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hvbmdxaW5nfGVufDB8fDB8fHww&fm=jpg&q=60&w=3000"
-                        alt="">
-
-                    <div class="product_info">
-                        <div style="display: flex; justify-content: space-between;">
-
-                            <h2 class="product_title">Chongqing asdasddad</h2>
-
-                            <button class="add_to_cart_btn">Añadir a la cesta</button>
-                        </div>
-
-                        <p class="product_category">Ciudad</p>
-                        <p class="product_status"> Como nuevo</p>
-                        <p class="overflow-auto product_description">
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation
-                            ullamco tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mi </p>
-                        <p class="product_price">12550 $</p>
-                    </div>
-                </div>
-                <div class="product_card">
-
-                    <img class="product_image"
-                        src="https://images.unsplash.com/photo-1581252584837-95f73fd23574?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hvbmdxaW5nfGVufDB8fDB8fHww&fm=jpg&q=60&w=3000"
-                        alt="">
-
-                    <div class="product_info">
-                        <div style="display: flex; justify-content: space-between;">
-
-                            <h2 class="product_title">Chongqing asdasddad</h2>
-
-                            <button class="add_to_cart_btn">Añadir a la cesta</button>
-                        </div>
-
-                        <p class="product_category">Ciudad</p>
-                        <p class="product_status"> Como nuevo</p>
-                        <p class="overflow-auto product_description">
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation
-                            ullamco tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mi </p>
-                        <p class="product_price">12550 $</p>
-                    </div>
-                </div>
-                <div class="product_card">
-
-                    <img class="product_image"
-                        src="https://images.unsplash.com/photo-1581252584837-95f73fd23574?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hvbmdxaW5nfGVufDB8fDB8fHww&fm=jpg&q=60&w=3000"
-                        alt="">
-
-                    <div class="product_info">
-                        <div style="display: flex; justify-content: space-between;">
-
-                            <h2 class="product_title">Chongqing asdasddad</h2>
-
-                            <button class="add_to_cart_btn">Añadir a la cesta</button>
-                        </div>
-
-                        <p class="product_category">Ciudad</p>
-                        <p class="product_status"> Como nuevo</p>
-                        <p class="overflow-auto product_description">
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation
-                            ullamco tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mi </p>
-                        <p class="product_price">12550 $</p>
-                    </div>
-                </div>
-                <div class="product_card">
-
-                    <img class="product_image"
-                        src="https://images.unsplash.com/photo-1581252584837-95f73fd23574?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hvbmdxaW5nfGVufDB8fDB8fHww&fm=jpg&q=60&w=3000"
-                        alt="">
-
-                    <div class="product_info">
-                        <div style="display: flex; justify-content: space-between;">
-
-                            <h2 class="product_title">Chongqing asdasddad</h2>
-
-                            <button class="add_to_cart_btn">Añadir a la cesta</button>
-                        </div>
-
-                        <p class="product_category">Ciudad</p>
-                        <p class="product_status"> Como nuevo</p>
-                        <p class="overflow-auto product_description">
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation
-                            ullamco tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mi </p>
-                        <p class="product_price">12550 $</p>
-                    </div>
-                </div>
-                <div class="product_card">
-
-                    <img class="product_image"
-                        src="https://images.unsplash.com/photo-1581252584837-95f73fd23574?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hvbmdxaW5nfGVufDB8fDB8fHww&fm=jpg&q=60&w=3000"
-                        alt="">
-
-                    <div class="product_info">
-                        <div style="display: flex; justify-content: space-between;">
-
-                            <h2 class="product_title">Chongqing asdasddad</h2>
-
-                            <button class="add_to_cart_btn">Añadir a la cesta</button>
-                        </div>
-
-                        <p class="product_category">Ciudad</p>
-                        <p class="product_status"> Como nuevo</p>
-                        <p class="overflow-auto product_description">
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation
-                            ullamco tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mi </p>
-                        <p class="product_price">12550 $</p>
-                    </div>
-                </div>
-                <div class="product_card">
-
-                    <img class="product_image"
-                        src="https://images.unsplash.com/photo-1581252584837-95f73fd23574?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hvbmdxaW5nfGVufDB8fDB8fHww&fm=jpg&q=60&w=3000"
-                        alt="">
-
-                    <div class="product_info">
-                        <div style="display: flex; justify-content: space-between;">
-
-                            <h2 class="product_title">Chongqing asdasddad</h2>
-
-                            <button class="add_to_cart_btn">Añadir a la cesta</button>
-                        </div>
-
-                        <p class="product_category">Ciudad</p>
-                        <p class="product_status"> Como nuevo</p>
-                        <p class="overflow-auto product_description">
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation
-                            ullamco tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mi </p>
-                        <p class="product_price">12550 $</p>
-                    </div>
-                </div>
-                <div class="product_card">
-
-                    <img class="product_image"
-                        src="https://images.unsplash.com/photo-1581252584837-95f73fd23574?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hvbmdxaW5nfGVufDB8fDB8fHww&fm=jpg&q=60&w=3000"
-                        alt="">
-
-                    <div class="product_info">
-                        <div style="display: flex; justify-content: space-between;">
-
-                            <h2 class="product_title">Chongqing asdasddad</h2>
-
-                            <button class="add_to_cart_btn">Añadir a la cesta</button>
-                        </div>
-
-                        <p class="product_category">Ciudad</p>
-                        <p class="product_status"> Como nuevo</p>
-                        <p class="overflow-auto product_description">
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation
-                            ullamco tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mi </p>
-                        <p class="product_price">12550 $</p>
-                    </div>
-                </div>
-                <div class="product_card">
-
-                    <img class="product_image"
-                        src="https://images.unsplash.com/photo-1581252584837-95f73fd23574?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hvbmdxaW5nfGVufDB8fDB8fHww&fm=jpg&q=60&w=3000"
-                        alt="">
-
-                    <div class="product_info">
-                        <div style="display: flex; justify-content: space-between;">
-
-                            <h2 class="product_title">Chongqing asdasddad</h2>
-
-                            <button class="add_to_cart_btn">Añadir a la cesta</button>
-                        </div>
-
-                        <p class="product_category">Ciudad</p>
-                        <p class="product_status"> Como nuevo</p>
-                        <p class="overflow-auto product_description">
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation
-                            ullamco tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mi </p>
-                        <p class="product_price">12550 $</p>
-                    </div>
-                </div>
-                <div class="product_card">
-
-                    <img class="product_image"
-                        src="https://images.unsplash.com/photo-1581252584837-95f73fd23574?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hvbmdxaW5nfGVufDB8fDB8fHww&fm=jpg&q=60&w=3000"
-                        alt="">
-
-                    <div class="product_info">
-                        <div style="display: flex; justify-content: space-between;">
-
-                            <h2 class="product_title">Chongqing asdasddad</h2>
-
-                            <button class="add_to_cart_btn">Añadir a la cesta</button>
-                        </div>
-
-                        <p class="product_category">Ciudad</p>
-                        <p class="product_status"> Como nuevo</p>
-                        <p class="overflow-auto product_description">
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation
-                            ullamco tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mi </p>
-                        <p class="product_price">12550 $</p>
-                    </div>
-                </div>
             </div>
-
-
         </div>
         <footer>
             <div class="footer_project_info">
@@ -529,6 +130,24 @@
         </footer>
     </div>
 
+    <!-- Templates -->
+    <template id="product_card_template">
+        <div class="product_card">
+
+            <img class="product_image" src="" alt="">
+
+            <div class="product_info">
+                <div>
+                    <h2 class="product_title"></h2>
+                </div>
+
+                <p class="product_category"></p>
+                <p class="product_status"></p>
+                <p class="product_price"></p>
+                <button class="add_to_cart_btn">Añadir a la cesta</button>
+            </div>
+        </div>
+    </template>
 </body>
 
 </html>
@@ -540,27 +159,27 @@
 
     html,
     body {
-  
         overflow-x: hidden;
         /* scrollbar-width: none; */
-
     }
 
-    html, body {
-        height: 100vh;
-        margin: 0;
-
+    html,
+    body {
         display: flex;
         flex-direction: column;
+
+        height: 100vh;
+        margin: 0;
     }
 
     .main {
-        min-height: 0;
-        flex: 1 1 auto;
-        /* ocupa el resto del espacio */
         display: flex;
         flex-direction: row;
+
+        flex: 1 1 auto;
+
         height: 800px;
+        min-height: 0;
 
         .products_section {
             height: 100%;
@@ -570,22 +189,53 @@
 
             .scrollabe_products {
                 height: 100%;
+
                 overflow-y: scroll;
-                    overflow: visible; /* ya no tiene scroll */
-                /* border: solid rgb(248, 21, 21) 1px; */
+                overflow: visible;
+                /* 
                 margin-top: 10px;
-                margin: 10px 10px 10px 0px;
-                margin-right: 10px;
+                margin: 10px 10px 10px 0px; */
 
                 overflow-y: auto;
                 scrollbar-width: none;
+
+                padding-top: 30px;
+                padding-bottom: 30px;
             }
         }
 
         .left_menu {
             flex: auto;
-            padding: 20px;
             background-color: rgb(255, 255, 255);
+            padding: 20px;
+
+            .search_button{
+                width: 100%;
+                height: 40px;
+
+                margin: 0 auto;
+                margin-top: 10px;
+
+                border-radius: 6px;
+                border: none;
+
+                background-color: black;
+                color: white;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .left_menu {
+                padding-left: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .left_menu {
+                width: 100%;
+                height: 25vh;
+                padding: 0 auto;
+            }
         }
     }
 
@@ -614,13 +264,9 @@
             text-decoration: underline;
         }
     }
-
-    @media (max-width: 768px) {
-        .left_menu {
-            width: 100%;
-            /* ocupa toda la fila superior */
-            height: 25vh;
-            /* altura pequeña */
-        }
-    }
 </style>
+<script>
+    window.addEventListener("DOMContentLoaded", () => {
+        main();
+    });
+</script>
