@@ -1,5 +1,4 @@
 
-
 //-------------------------- INICIAR SESIÓN ----------------------------
 
 function loginFormValidation() {
@@ -10,7 +9,7 @@ function loginFormValidation() {
 
     // Regex validación
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    
+
     // Al hacer "submit" en el form
     form.addEventListener('submit', event => {
 
@@ -34,10 +33,10 @@ function loginFormValidation() {
             fetchLogInUser(userData, formStatusMsg)
                 .then(isUserLoged => {
                     if (isUserLoged) {
-                        // Redirigir a la página principal tras 2 segundos
+                        // Redirigir a la página principal tras 1.5 segundos
                         setTimeout(() => {
                             window.location.href = "productos.html";
-                        }, 2000);
+                        }, 1500);
                     }
                 });
         }
@@ -247,6 +246,9 @@ async function fetchLogInUser(curlBody, formStatusMsg) {
 
         // Guardar token en LocalStorage
         const data = await response.json();
+        data["email"] = curlBody["email"];
+
+        localStorage.clear();
         localStorage.setItem("userData", JSON.stringify(data));
 
         return true;
