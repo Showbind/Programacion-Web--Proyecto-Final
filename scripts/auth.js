@@ -35,7 +35,7 @@ function loginFormValidation() {
                     if (isUserLoged) {
                         // Redirigir a la página principal tras 1.5 segundos
                         setTimeout(() => {
-                            window.location.href = "productos.html";
+                            window.location.href = "products.html";
                         }, 1500);
                     }
                 });
@@ -67,7 +67,6 @@ function signInFormValidation() {
     const passwordInput = document.getElementById('password');
     const repeatPasswordInput = document.getElementById('password_repeat');
     const coordinatesInput = document.getElementById('coordinates');
-
 
     // Regex validación
     const userNameRegex = /^.{4,}$/; // Regex nombre de usuario: mínimo 4 caracteres
@@ -105,10 +104,10 @@ function signInFormValidation() {
             fetchCreateUser(userData, formStatusMsg)
                 .then(isUserCreated => {
                     if (isUserCreated) {
-                        // Redirigir a la página principal tras 2 segundos
+                        // Redirigir a la página principal tras 1.5 segundos
                         setTimeout(() => {
-                            window.location.href = "productos.html";
-                        }, 2000);
+                            window.location.href = "login.html";
+                        }, 1500);
                     }
                 });
         }
@@ -231,7 +230,7 @@ async function fetchLogInUser(curlBody, formStatusMsg) {
         });
 
         if (!response.ok) {
-            if (response.status == 401) { // Datos de usuario incorrectos
+            if (response.status == 400 || response.status == 401) { // Datos de usuario incorrectos
 
                 formStatusMsg.innerText = "El correo electrónico o contraseña son incorrectos.";
                 formStatusMsg.classList.add("error_msg");
