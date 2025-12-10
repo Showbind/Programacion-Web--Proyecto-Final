@@ -1,3 +1,4 @@
+export { loginFormValidation, signInFormValidation };
 
 //-------------------------- INICIAR SESIÓN ----------------------------
 

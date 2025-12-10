@@ -105,8 +105,16 @@
     }
 }
 
+.row_1 {
+    align-content: center;
+    background-image: url(https://images.unsplash.com/photo-1581252584837-95f73fd23574?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hvbmdxaW5nfGVufDB8fDB8fHww&fm=jpg&q=60&w=3000);
+    background-repeat: no-repeat;
+    background-position: right; 
+    background-size: cover;
+}
+
 /* Eliminar el verde de Input Correcto de Bootstrap */
-.signForm .form-control.is-valid,   
+.signForm .form-control.is-valid,
 .signForm .form-control:valid,
 .editForm .form-control.is-valid,
 .editForm .form-control:valid,

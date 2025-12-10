@@ -1,3 +1,5 @@
+export { productsWebPage, myProductsWebPage, loadUserSession, logUser, fetchGetAllProducts};
+
 // Funcion SetUp de "productos.html"
 async function productsWebPage() {
 
@@ -43,22 +45,16 @@ async function myProductsWebPage() {
 
 // ----------------------------------------------------------
 
-// Autentificar Usuario
+// Cargar Usuario
 function loadUserSession() {
-    // Variables & Elementos DOM
-    const logOut = document.getElementById("log_out");
-    let userDataInLocalStorage = localStorage.getItem("userData");
 
-    if (!userDataInLocalStorage) {
-        console.error("Error: Acceso no autorizado");
-        window.location.href = "login.html";
-    };
-
-    const userData = JSON.parse(userDataInLocalStorage);
+    const userData = logUser();
 
     // Mostrar Nombre del Usuario
     const usernameTag = document.getElementById("username_tag");
     usernameTag.innerHTML = userData["user"];
+
+    const logOut = document.getElementById("log_out");
 
     // Botón Cerrar Sesión
     logOut.addEventListener('click', (event) => {
@@ -70,8 +66,18 @@ function loadUserSession() {
     return userData
 }
 
-// Exportar autentificación
-export { loadUserSession};
+function logUser() {
+    let userDataInLocalStorage = localStorage.getItem("userData");
+
+    if (!userDataInLocalStorage) {
+        console.error("Error: Acceso no autorizado");
+        window.location.href = "login.html";
+    };
+
+    const userData = JSON.parse(userDataInLocalStorage);
+
+    return userData;
+}
 
 // Mostrar los productos del "marketplace" aplicando los filtros del usuario
 function displayProducts(products, userId) {
@@ -97,7 +103,7 @@ function displayMyProducts(products, userId) {
         return (item["idUser"] == userId) && (item["state"].toLowerCase() == "en venta");
     });
 
-    createProductsCards(filterProducts, mode = "edit")
+    createProductsCards(filterProducts, "edit")
 }
 
 // Añadir productos al DOM
@@ -113,7 +119,7 @@ function createProductsCards(products, mode = "buy") {
     let shoppingCart = JSON.parse(localStorage.getItem(shoppingCartKey)) || { "products": [] };
 
     // Token LocalStorage
-    const userToken = loadUserSession()["access_token"];
+    const userToken = logUser()["access_token"];
 
     // Crear tarjetas de cada producto
     for (const item of products) {

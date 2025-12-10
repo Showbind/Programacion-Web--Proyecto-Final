@@ -1,3 +1,5 @@
+import { logUser } from "./products.js";
+export { editProduct, fetchGetOneProduct};
 
 async function editProduct() {
     // Coger token del local storage
@@ -8,7 +10,7 @@ async function editProduct() {
         window.location.href = "login.html";
     };
 
-    const userData = JSON.parse(userDataInLocalStorage);
+    const userData = logUser()
     const userToken = userData["access_token"];
     const userId = userData["email"];
 

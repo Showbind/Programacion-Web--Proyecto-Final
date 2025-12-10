@@ -28,15 +28,12 @@
     <!-- CSS -->
     <link rel="stylesheet" href="styles/signIn_form.css">
     <link rel="stylesheet" href="styles/styles.css">
-
-    <!-- Scripts -->
-    <script src="scripts/auth.js" defer></script>
 </head>
 
 <body>
     <div class="container-fluid">
         <div class="row" style="height: 100vh;">
-            <div class="col-12 col-lg-12" id="row_1">
+            <div class="col-12 col-lg-12 row_1">
                 <form class="signForm col-12 col-md-7 col-lg-6 col-xl-4 col-xxl-4 needs-validation" novalidate>
 
                     <!-- Titulo Formulario -->
@@ -111,22 +108,10 @@
     </div>
 
 </body>
-
 </html>
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-    }
-    #row_1 {
-        align-content: center;
-        background-image: url(https://images.unsplash.com/photo-1581252584837-95f73fd23574?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hvbmdxaW5nfGVufDB8fDB8fHww&fm=jpg&q=60&w=3000);
-        background-repeat: no-repeat;
-        background-position: right; /* Posición del fondo en movil  */
-        background-size: cover;
-    }
-</style>
-<script>
+<script type="module">
+    import { signInFormValidation } from "./scripts/auth.js";
+
     // Resetear formulario al recarga la pagina
     window.addEventListener('load', () => {
         const form = document.querySelector('.signForm');

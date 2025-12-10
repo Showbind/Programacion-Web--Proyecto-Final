@@ -28,9 +28,6 @@
     <!-- CSS -->
     <link rel="stylesheet" href="styles/signIn_form.css">
     <link rel="stylesheet" href="styles/styles.css">
-
-    <!-- Scripts -->
-    <script src="scripts/edit_product.js" defer></script>
 </head>
 
 
@@ -97,13 +94,6 @@
 
 </html>
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-
-        /* border: solid red 1px; */
-    }
-
     #row_1 {
 
         align-content: center;
@@ -114,7 +104,10 @@
         background-size: cover;
     }
 </style>
-<script>
+
+<script type="module">
+    import { editProduct } from "./scripts/edit_product.js";
+
     // Resetear formulario al recarga la pagina
     window.addEventListener('load', () => {
         const form = document.querySelector('.editForm');
@@ -123,6 +116,6 @@
 
     // Cargar logica principal del formulario
     window.addEventListener("DOMContentLoaded", () => {
-        editProduct()
+        editProduct();
     });
 </script>

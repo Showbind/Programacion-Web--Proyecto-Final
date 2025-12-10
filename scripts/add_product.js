@@ -1,14 +1,9 @@
+import { logUser } from "./products.js";
+export { addProduct };
 
 async function addProduct() {
-    // Coger token del local storage
-    let userDataInLocalStorage = localStorage.getItem("userData");
 
-    if (!userDataInLocalStorage) {
-        console.error("Error: Acceso no autorizado");
-        window.location.href = "login.html";
-    };
-
-    const userData = JSON.parse(userDataInLocalStorage);
+    const userData = logUser();
     const userToken = userData["access_token"];
     const userId = userData["email"];
 

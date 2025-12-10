@@ -27,18 +27,13 @@
 
     <!-- Fontawesome -->
     <script src="https://kit.fontawesome.com/8d1c49f937.js" crossorigin="anonymous"></script>
-
-    <!-- Scripts -->
-    <script src="scripts/products.js" defer></script>
 </head>
 
 <body>
 
     <nav class="navbar sticky-top navbar-light navbar-expand-md bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <i class="fa-brands fa-python" style="font-size: 52px ;color: #e77a21;"></i>
-            </a>
+            <a class="navbar-brand" href="#"></a>
 
             <!-- Boton "Hamburguesa" para Moviles -->
             <button class="menu_button navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -55,20 +50,21 @@
                     </li>
                     <li class="nav-item"><a class="nav-link " aria-current="page" href="my_products.html">Mis
                             Productos</a></li>
-                    <li class="nav-item"><a class="nav-link " aria-current="page"
-                            href="stats.html">Estadísticas</a></li>
+                    <li class="nav-item"><a class="nav-link " aria-current="page" href="stats.html">Estadísticas</a>
+                    </li>
                 </ul>
 
                 <!-- LINEA SEPARADORA NAVBAR EN MOVIL -->
                 <li style="list-style: none; ;" class="nav-item hr-mobile">
-                    <hr style="color: #f27b13; ">
+                    <hr style="color: #ee072d; ">
                 </li>
 
                 <!-- ELEMENTOS LADO DERECHO NAVBAR -->
                 <ul class=" navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" id="username_tag">Username</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" aria-current="page" href="">Icono carrito</a>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="cart.html">Tu Carrito<i
+                                class="fa-solid fa-cart-shopping" style="font-size: 16px; margin-left: 5px;"></i></a>
                     </li>
                     <li class="nav-item"><a class="nav-link" id="log_out" aria-current="page" href="">Cerrar Sesión</a>
                     </li>
@@ -81,23 +77,22 @@
 
         <!-- MENÚ (columna en PC, fila en móvil) -->
         <div class="col-12 col-md-2 edit_menu">
-            <div>
-                <button id="button_create_product" class="search_button">Añadir Producto</button>
+            <div style="text-align: center;">
+                <button id="button_create_product" class="add_product_button"
+                    style="margin-left: 25px !important;">Añadir Producto</button>
             </div>
         </div>
 
         <!-- CONTENIDO -->
         <div class="col-12 col-md-10 products_section">
-            <div class="scrollabe_products"
-                style="display: flex; justify-content: space-evenly; flex-wrap: wrap; gap: 30px;">
-                <!-- Aquí van las tarjetas de productos -->
+            <div class="scrollabe_products">
+                <!-- Aquí van las tarjetas de productos (se hace desde el js)-->
             </div>
         </div>
         <footer>
             <div class="footer_project_info">
-                <a class="footer_link" href="https://github.com/Showbind/Programacion-Web--Proyecto-Final">Proyecto
-                    Final -
-                    Programación Web - Gabriel - Universidad de Burgos - 2025</a>
+                <a class="footer_link" href="https://github.com/Showbind/Programacion-Web--Proyecto-Final">
+                    Proyecto Final - Programación Web - Gabriel Estévez - Universidad de Burgos - 2025</a>
             </div>
         </footer>
     </div>
@@ -126,28 +121,14 @@
 </body>
 
 </html>
-<style>
-    * {
-        /* border: solid red 1px; */
-        /* overflow-x: hidden; */
-    }
 
-    html,
-    body {
-        display: flex;
-        flex-direction: column;
+<script type="module">
+    import { myProductsWebPage } from "./scripts/products.js";
 
-        height: 100vh;
-        margin: 0;
-
-        overflow-x: hidden;
-    }
-</style>
-<script>
     window.addEventListener("DOMContentLoaded", () => {
         const addProductButton = document.querySelector("#button_create_product");
         myProductsWebPage();
-        
+
         addProductButton.addEventListener("click", () => {
             window.location.href = "add.html";
         });

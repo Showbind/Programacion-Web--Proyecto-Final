@@ -28,16 +28,13 @@
     <!-- CSS -->
     <link rel="stylesheet" href="styles/signIn_form.css">
     <link rel="stylesheet" href="styles/styles.css">
-
-    <!-- Scripts -->
-    <script src="scripts/auth.js" defer></script>
 </head>
 
 
 <body>
     <div class="container-fluid">
         <div class="row" style="height: 100vh;">
-            <div class="col-12 col-lg-12" id="row_1">
+            <div class="col-12 col-lg-12 row_1">
                 <form class="signForm col-12 col-md-7 col-lg-6 col-xl-4 col-xxl-3 needs-validation" method="post"
                     novalidate>
 
@@ -79,27 +76,11 @@
             </div>
         </div>
     </div>
-
 </body>
-
 </html>
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-        /* border: solid red 1px; */
-    }
+<script type="module">
+    import { loginFormValidation } from "./scripts/auth.js";
 
-    #row_1 {
-
-        align-content: center;
-        background-image: url(https://images.unsplash.com/photo-1581252584837-95f73fd23574?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hvbmdxaW5nfGVufDB8fDB8fHww&fm=jpg&q=60&w=3000);
-        background-repeat: no-repeat;
-        background-position: right;
-        background-size: cover;
-    }
-</style>
-<script>
     window.addEventListener("DOMContentLoaded", () => {
         loginFormValidation();
     });

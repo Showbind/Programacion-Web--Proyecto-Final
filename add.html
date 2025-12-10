@@ -28,9 +28,6 @@
     <!-- CSS -->
     <link rel="stylesheet" href="styles/signIn_form.css">
     <link rel="stylesheet" href="styles/styles.css">
-
-    <!-- Scripts -->
-    <script src="scripts/add_product.js" defer></script>
 </head>
 
 
@@ -115,7 +112,9 @@
         background-size: cover;
     }
 </style>
-<script>
+<script type="module">
+    import { addProduct } from "./scripts/add_product.js";
+
     // Resetear formulario al recarga la pagina
     window.addEventListener('load', () => {
         const form = document.querySelector('.editForm');
@@ -124,6 +123,6 @@
 
     // Cargar logica principal del formulario
     window.addEventListener("DOMContentLoaded", () => {
-        addProduct()
+        addProduct();
     });
 </script>
