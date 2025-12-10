@@ -47,7 +47,8 @@ async function loadMap(userToken) {
     // Mostrar coordenadas de los usuarios en el mapa
     const coordinates = await fetchGetUsersCoordinates(userToken);
     for (const position of coordinates) {
-        setLocationPin(position["latitude"], position["longitude"], "#f50f4c")
+        console.log(position);
+        setLocationPin(position["longitude"], position["latitude"], "#f50f4c")
     }
 
 }
